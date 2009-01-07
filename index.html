@@ -1,10 +1,116 @@
----
-layout: default
-title: rQRCode
----
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>rQRCode, a Ruby library for encoding QR Codes</title>
+<meta http-equiv="content-language" content="en" />
+<meta http-equiv="author" content="Duncan Robertson" />
+<meta name="copyright" content="Copyright (c)1999-2008 Duncan Robertson. All Rights Reserved." />
+<link rel="stylesheet" href="http://whomwah.local/wp-content/themes/whomwah/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://whomwah.local/wp-content/plugins/wp-syntax/wp-syntax.css" type="text/css" media="screen" />
+</head>
+<body>
+<div id="page">
 
-This project <a href="http://github.com//website">rQRCode</a> is awesome.
+<div id="accessible-top"><a href="#footer" title="Skip down to the footer">skip to footer</a></div>
 
-To enable Disqus comments + badges for this site, [add it to your Disqus account](http://disqus.com/add/).
+<div id="header">
+  <div id="headerimg">
+    <h1><a href="http://whomwah.local/">rQRCode</a></h1>
+    <p class="description">A Ruby library for encoding QR Codes</p>
+  </div>
+</div>
 
-Also, you can/should [create a Lighthouse project](http://.lighthouseapp.com/projects/new) for your project and update "TODO" within the _layouts files with the project id (e.g. "12345-website" from the Lighthouse project url).
+<hr />
+
+<div id="content" class="widecolumn">
+  <div class="post" id="post-314">
+    <div class="entry">
+      <p><a href="http://whomwah.github.com/rqrcode">rQRCode</a> is a library for encoding QR Codes in Ruby. It has a simple interface with all the standard qrcode options. It was adapted from the Javascript library by Kazuhiko Arase.</p>
+      <p>There is a <a href="http://rubyforge.org/projects/rqrcode">rQRCode Rubyforge project</a> setup. You can also view the <a href="http://rqrcode.rubyforge.org">rQRCode documentation</a> or just jump straight into installing the gem.</p>
+
+      <div class="wp_syntax"><div class="code"><pre class="ruby ruby" style="font-family:monospace;">sudo gem install rqrcode</pre></div></div>
+
+      <p>A quick simple example in the console:</p>
+      <div class="wp_syntax"><div class="code"><pre class="ruby ruby" style="font-family:monospace;"><span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#CC0066; font-weight:bold;">require</span> <span style="color:#996600;">'rubygems'</span>
+<span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#CC0066; font-weight:bold;">require</span> <span style="color:#996600;">'rqrcode'</span>
+<span style="color:#006600; font-weight:bold;">=&gt;</span> qr = <span style="color:#6666ff; font-weight:bold;">RQRCode::QRCode</span>.<span style="color:#9900CC;">new</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">'hello world'</span><span style="color:#006600; font-weight:bold;">&#41;</span>
+<span style="color:#006600; font-weight:bold;">&gt;&gt;</span> <span style="color:#008000; font-style:italic;">#&lt;RQRCode::QRCode:0x32a9 ......</span>
+<span style="color:#006600; font-weight:bold;">=&gt;</span> <span style="color:#CC0066; font-weight:bold;">puts</span> qr.<span style="color:#9900CC;">to_s</span>
+<span style="color:#006600; font-weight:bold;">&gt;&gt;</span>
+xxxxxxx    xxxx   xxxxxxx
+x     x x   xxx   x     x
+x xxx x x  xx xx  x xxx x
+x xxx x xx x  x   x xxx x
+.....</pre></div></div>
+
+      <p>Also, here is a quick example of using it in a Ruby on Rails project:</p>
+      <div class="wp_syntax"><div class="code"><pre class="ruby ruby" style="font-family:monospace;"># Controller
+require 'rqrcode'
+&nbsp;
+def qrcode
+ @qr = RQRCode::QRCode.new('hello world')
+end
+&nbsp;
+# View
+&lt;style type=&quot;text/css&quot;&gt;
+ table {
+  border-width: 0;
+  border-style: none;
+  border-color: #0000ff;
+         border-collapse: collapse;
+ }
+ td {
+   border-width: 0;
+   border-style: none;
+   border-color: #0000ff;
+   border-collapse: collapse;
+   padding: 0;
+   margin: 0;
+   width: 10px;
+   height: 10px;
+ }
+ td.black { background-color: #000; }
+ td.white { background-color: #fff; }
+&lt;/style&gt;
+&nbsp;
+&lt;table&gt;
+ <span style="color:#006600; font-weight:bold;">&lt;%</span> <span style="color:#0066ff; font-weight:bold;">@qr</span>.<span style="color:#9900CC;">modules</span>.<span style="color:#9900CC;">each_index</span> <span style="color:#9966CC; font-weight:bold;">do</span> |x| <span style="color:#006600; font-weight:bold;">%&gt;</span>
+   &lt;tr&gt;
+   <span style="color:#006600; font-weight:bold;">&lt;%</span> <span style="color:#0066ff; font-weight:bold;">@qr</span>.<span style="color:#9900CC;">modules</span>.<span style="color:#9900CC;">each_index</span> <span style="color:#9966CC; font-weight:bold;">do</span> |y| <span style="color:#006600; font-weight:bold;">%&gt;</span>
+    <span style="color:#006600; font-weight:bold;">&lt;%</span> <span style="color:#9966CC; font-weight:bold;">if</span> <span style="color:#0066ff; font-weight:bold;">@qr</span>.<span style="color:#9900CC;">is_dark</span><span style="color:#006600; font-weight:bold;">&#40;</span>x,y<span style="color:#006600; font-weight:bold;">&#41;</span> <span style="color:#006600; font-weight:bold;">%&gt;</span>
+    &lt;td class=&quot;black&quot;/&gt;
+    <span style="color:#006600; font-weight:bold;">&lt;%</span> <span style="color:#9966CC; font-weight:bold;">else</span> <span style="color:#006600; font-weight:bold;">%&gt;</span>
+     &lt;td class=&quot;white&quot;/&gt;
+    <span style="color:#006600; font-weight:bold;">&lt;%</span> <span style="color:#9966CC; font-weight:bold;">end</span> <span style="color:#006600; font-weight:bold;">%&gt;</span>
+   <span style="color:#006600; font-weight:bold;">&lt;%</span> <span style="color:#9966CC; font-weight:bold;">end</span> <span style="color:#006600; font-weight:bold;">%&gt;</span>
+   &lt;/tr&gt;
+ <span style="color:#006600; font-weight:bold;">&lt;%</span> <span style="color:#9966CC; font-weight:bold;">end</span> <span style="color:#006600; font-weight:bold;">%&gt;</span>
+&lt;/table&gt;</pre></div></div>
+
+<p>View or fork the source via GitHub: <a href="github.com/whomwah/rqrcode/tree/master">github.com/whomwah/rqrcode/tree/master</a>. Here is the Public Clone URL:</p>
+<div class="wp_syntax"><div class="code"><pre class="ruby ruby" style="font-family:monospace;">git clone git://github.com/whomwah/rqrcode.git</pre></div></div>
+
+<p class="note">Launched: <em>Sunday, February 24th, 2008</em></p>
+<p class="note">Author: <em>Duncan Robertson</em> [<a href="http://whomwah.com">http://whomwah.com</a>]</p>
+
+</div>
+</div>
+</div>
+
+<hr />
+
+<div id="footer">
+  <p>&copy;1999-2008 Duncan Robertson. All rights reserved.</p>
+</div>
+
+<div id="accessible-bottom"><a href="#page" title="Back to the top of the page">back to the top</a></div>
+
+</div>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+_uacct = "UA-111545-1";
+urchinTracker();
+</script>
+</body>
+</html>
