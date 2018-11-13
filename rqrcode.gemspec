@@ -23,7 +23,6 @@ EOF
   s.add_development_dependency "rake"
   s.add_development_dependency("bundler", ">= 1.0.0")
 
-  s.has_rdoc      = true
   s.extra_rdoc_files = ["README.md", "CHANGELOG", "LICENSE"]
   s.files         = `git ls-files lib README.md CHANGELOG LICENSE`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
